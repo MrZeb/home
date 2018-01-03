@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/sebastianfurle/.oh-my-zsh
+export ZSH=/Users/seb/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -88,28 +88,30 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 
-# Set default text editor to Atom
-export EDITOR=/Applications/Atom.app/Contents/MacOs/Atom
-export VISUAL=/Applications/Atom.app/Contents/MacOs/Atom
+# Set default text editor to Sublime Text
+export EDITOR='subl'
+export VISUAL='subl'
 
 # Set ADB path
-export PATH=/Users/sebastianfurle/Library/Android/sdk/platform-tools://Users/sebastianfurle/Library/Android/sdk/tools:$PATH
+export PATH=/Users/seb/Library/Android/sdk/platform-tools://Users/seb/Library/Android/sdk/tools:$PATH
 
-export PATH="$PATH:/Users/sebastianfurle/Documents/infer-osx-v0.1.0/infer/infer/bin"
+export PATH="$PATH:/Users/seb/Documents/infer-osx-v0.1.0/infer/infer/bin"
 
 # ALIAS
-alias editbash='open -a Atom ~/.bash_profile'
-alias editz='open -a Atom ~/.zshrc'
+alias editbash='open -a Sublime\ Text ~/.bash_profile'
+alias editz='open -a Sublime\ Text ~/.zshrc'
 
 # ADB
-alias uninstallforza='adb uninstall se.footballaddicts.livescore.devop'
+alias clearforza='adb devices | tail -n +2 | cut -sf 1 | xargs -I {} adb -s {} shell pm clear se.footballaddicts.livescore.devop && say -v Nora "Fårza fotbold data ble nettopp manglet"'
+alias uninstallforza='adb devices | tail -n +2 | cut -sf 1 | xargs -I {} adb -s {} uninstall se.footballaddicts.livescore.devop && say -v Nora "Fårza fotbold ble nettopp avinstallert"'
 alias recdevice='adb shell screenrecord "sdcard/recording.mp4"'
-alias recpull='adb pull "sdcard/recording.mp4" "/Users/sebastianfurle/Documents"'
+alias recpull='adb pull "sdcard/recording.mp4" "/Users/seb/Documents"'
+alias restartadb='adb kill-server && adb start-server'
 
 # Forza
-alias createamazonservice='make clean && make forza-java && cp AmazonService.* ~/AndroidStudioProjects/forza-football-android/forzaFootball/src/main/java/se/footballaddicts/livescore/tracking'
-alias createabtests='make clean && make abtests-java && cp AbTests.* ~/AndroidStudioProjects/forza-football-android/forzaFootball/src/main/java/se/footballaddicts/livescore/tracking'
-alias sendpush='python /Users/sebastianfurle/AndroidStudioProjects/sendGCM.py'
+alias createamazonservice='make clean && make forza-java && cp AmazonService.* ~/Repos/forza-football-android/forzaFootball/src/main/java/se/footballaddicts/livescore/tracking'
+alias createabtests='make clean && make abtests-java && cp AbTests.* ~/Repos/forza-football-android/forzaFootball/src/main/java/se/footballaddicts/livescore/tracking'
+alias sendpush='python /Users/seb/Repos/sendGCM.py'
 
 # Setting PATH for Python 3.5
 say "hello furley, how are yoou?" &
@@ -125,3 +127,5 @@ alias newfeature='git flow feature start'
 
 bindkey "^[^[[C" forward-word
 bindkey "^[^[[D" backward-word
+export PATH=$PATH:$HOME/bin
+export EDITOR='subl' -w
