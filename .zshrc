@@ -89,32 +89,35 @@ source $ZSH/oh-my-zsh.sh
 #
 
 # Set default text editor to Sublime Text
-export EDITOR='subl'
-export VISUAL='subl'
+export EDITOR='subl -w'
+export VISUAL=$EDITOR
 
 # Set ADB path
 export PATH=/Users/seb/Library/Android/sdk/platform-tools://Users/seb/Library/Android/sdk/tools:$PATH
 
 export PATH="$PATH:/Users/seb/Documents/infer-osx-v0.1.0/infer/infer/bin"
 
+export PATH="$PATH:/Users/seb/kotlin-native/bin"
+
+export ANDROID_SDK_ROOT=/Users/seb/Library/Android/sdk
+
 # ALIAS
 alias editbash='open -a Sublime\ Text ~/.bash_profile'
 alias editz='open -a Sublime\ Text ~/.zshrc'
 
 # ADB
-alias clearforza='adb devices | tail -n +2 | cut -sf 1 | xargs -I {} adb -s {} shell pm clear se.footballaddicts.livescore.devop && say -v Nora "Fårza fotbold data ble nettopp manglet"'
-alias uninstallforza='adb devices | tail -n +2 | cut -sf 1 | xargs -I {} adb -s {} uninstall se.footballaddicts.livescore.devop && say -v Nora "Fårza fotbold ble nettopp avinstallert"'
+alias clearforza='adb devices | tail -n +2 | cut -sf 1 | xargs -I {} adb -s {} shell pm clear se.footballaddicts.livescore.devop'
+alias uninstallforza='adb devices | tail -n +2 | cut -sf 1 | xargs -I {} adb -s {} uninstall se.footballaddicts.livescore.devop'
 alias recdevice='adb shell screenrecord "sdcard/recording.mp4"'
 alias recpull='adb pull "sdcard/recording.mp4" "/Users/seb/Documents"'
 alias restartadb='adb kill-server && adb start-server'
 
 # Forza
-alias createamazonservice='make clean && make forza-java && cp AmazonService.* ~/Repos/forza-football-android/forzaFootball/src/main/java/se/footballaddicts/livescore/tracking'
-alias createabtests='make clean && make abtests-java && cp AbTests.* ~/Repos/forza-football-android/forzaFootball/src/main/java/se/footballaddicts/livescore/tracking'
+alias createamazonservice='make clean && make forza-java && cp AmazonService.* ~/Repos/forza-football-android/forzaFootball/src/main/java/se/footballaddicts/livescore/utils/tracking/'
+alias createabtests='make clean && make abtests-java && cp AbTests.* ~/Repos/forza-football-android/forzaFootball/src/main/java/se/footballaddicts/livescore/tracking/'
 alias sendpush='python /Users/seb/Repos/sendGCM.py'
 
 # Setting PATH for Python 3.5
-say "hello furley, how are yoou?" &
 # The orginal version is saved in .bash_profile.pysave
 PATH="/Library/Frameworks/Python.framework/Versions/3.5/bin:${PATH}"
 export PATH
@@ -122,10 +125,19 @@ export PATH
 # Git
 alias undo='echo "UNDOING COMMIT."; git reset --soft HEAD^'
 
-# Git flow
-alias newfeature='git flow feature start'
-
 bindkey "^[^[[C" forward-word
 bindkey "^[^[[D" backward-word
 export PATH=$PATH:$HOME/bin
-export EDITOR='subl' -w
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/seb/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/seb/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/seb/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/seb/google-cloud-sdk/completion.zsh.inc'; fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export PATH="$PATH:/Users/seb/Documents/flutter/bin"
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
